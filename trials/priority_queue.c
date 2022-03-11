@@ -5,17 +5,19 @@ Write each operation (enqueue,dequeue and display) as a seperate fucntion. Also,
 a menu driven mode mode that demonstrates use of all operation*/
 #include<stdio.h>
 #include<stdlib.h>
-#define max 100
-void enqueue(int);
-int dequeue();
-void create(); //function to create an empty priority queue
-void check(int);
-void display();
-int pri_que[max],front,rear;
+typedef struct Node 
+{
+    int info;
+    int priority;
+    struct Node *link;
+}Node;
+Node *front=NULL;
+void insert(int data, int priority); //for insertion
+int del(); //for deletion
+void display(); //for displaying the queue
 void main()
 {
-    int n,choice;
-    create();
+    int choice,data,priority;
     while(1)
     {
         printf("\n1. Insert");
@@ -27,12 +29,14 @@ void main()
         {
             case 1:
             printf("\nEnter the element: ");
-            scanf("%d",&n);
-            enqueue(n);
+            scanf("%d",&data);
+            printf("\nEnter the priority: ");
+            scanf("%d",&priority);
+            insert(data,priority);
             break;
             case 2:
-            n=dequeue();
-            printf("\nDeleted Item: %d",n);
+            data=del();
+            printf("\nDeleted Item: %d\n",data);
             break;
             case 3:
             display();
@@ -44,71 +48,60 @@ void main()
         }
     }
 }
-void create()  //function to create an empty priority queue
+void insert(int data, int priority)
 {
-    front=-1;
-    rear=-1;
-}
-void enqueue(int data)  //function to insert value into priority queue
-{
-    if(rear>=max-1)
+    Node *temp,*q;
+    temp=(Node *)malloc(sizeof(Node));
+    temp->info=data;
+    temp->priority=priority;
+    if(front==NULL || priority<front->priority)
     {
-        printf("\nOverflow");
-    }
-    if(front==-1 && rear==-1)
-    {
-        front++;
-        rear++;
-        pri_que[rear]=data;
+        temp->link=front;
+        front=temp;
     }
     else
     {
-        check(data);
-        rear++;
-    }
-}
-void check(int data)  //fucntion to check priority and place element
-{
-    int x,j;
-    for(x=0;x<=rear;x++)
-    {
-        if(data>=pri_que[x])
+        q=front;
+        while(q->link!=NULL && q->link->priority<=priority)
         {
-            for(j=rear+1;j>x;j--)
-            {
-                pri_que[j]=pri_que[j-1];
-            }
-            pri_que[x]=data;
-            return ;
+            q=q->link;
         }
+        temp->link=q->link;
+        q->link=temp;
     }
-    pri_que[x]=data;
 }
-int dequeue() // function to delete an element from the queue
+int del()
 {
-    int x=pri_que[front];
-    if(front==-1 && rear==-1)
+    int item;
+    Node *temp;
+    if(front==NULL)
     {
         printf("\nUnderflow");
     }
     else
     {
-        front--;
-        return x;
+        temp=front;
+        item=temp->info;
+        front=front->link;
+        free(temp);
     }
 }
 void display()
 {
-    if(front==-1 && rear==-1)
+    Node *ptr;
+    ptr=front;
+    if(front==NULL)
     {
         printf("\nEmpty Queue");
     }
     else
     {
-        for(int i=front;i<=rear;i++)
+        printf("\nQueue is: \n");
+        printf("Priority\tItem\n");
+        while(ptr!=NULL)
         {
-            printf("%d ",pri_que[i]);
+            printf("%d\t\t%d\n",ptr->priority,ptr->info);
+            ptr=ptr->link;
         }
     }
-    front=0;
 }
