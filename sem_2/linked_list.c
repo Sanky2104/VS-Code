@@ -1,146 +1,228 @@
-#include<stdio.h>
+//Author: Sanskriti Gupta
+//Date: 10 March 2022
+//Aim: To implement insertion/deletion at beginning, end and position of a singly linked list
 #include<stdlib.h>
-struct Node
+#include <stdio.h>
+struct Node 
 {
-    int info;
-    struct Node *link;
+	int data;
+	struct Node *link;
 };
-struct Node *create_node(struct Node *start);
-void display(struct Node *start);
-struct Node* insert_begin(struct Node *start, int data);
-struct Node* insert_end(struct Node *start, int data);
-struct Node *insert_pos(struct Node *start, int data, int pos);
-struct Node *create_node(struct Node *start)
+struct Node *start;
+void display();
+struct Node *create_node();
+void ins_beg(int item);
+void ins_end(int item);
+void ins_pos(int item, int pos);
+int del_beg();
+int del_end();
+int del_pos(int pos);
+void main()
 {
-    int i,n,data;
-    printf("Enter the number of nodes: ");
-    scanf("%d",&n);
-    start=NULL;
-    if(n==0)
-    {
-        return start;
-    }
-    printf("Enter the element to be inserted: ");
-    scanf("%d",&data);
-    start=insert_begin(start,data);
-    for(i=2;i<=n;i++)
-    {
-        printf("Enter the element to be inserted: ");
-        scanf("%d",&data);
-        start=insert_end(start,data);
-    }
-    return start;
-}
-void display(struct Node *start)
-{
-    struct Node *p;
-    if(start==NULL)
-    {
-        printf("EMPTY LIST\n");
-        return;
-    }
-    p=start;
-    printf("List is: ");
-    while(p!=NULL)
-    {
-        printf("%d ",p->info);
-        p=p->link;
-    }
-    printf("\n\n");
-}
-struct Node* insert_begin(struct Node *start, int data)
-{
-    struct Node *tmp;
-    tmp=(struct Node *)malloc(sizeof(struct Node));
-    tmp->info=data;
-    tmp->link=start;
-    start=tmp;
-    return start;
-}
-struct Node* insert_end(struct Node *start, int data)
-{
-    struct Node *p,*tmp;
-    tmp=(struct Node *)malloc(sizeof(struct Node));
-    tmp->info=data;
-    p=start;
-    while(p->link!=NULL)
-    {
-        p=p->link;
-    }
-    p->link=tmp;
-    tmp->link=NULL;
-    return start;
-}
-struct Node *insert_pos(struct Node *start, int data, int pos)
-{
-    struct Node *tmp,*p;
-    int i;
-    tmp=(struct Node *)malloc(sizeof(struct Node));
-    tmp->info=data;
-    if(pos==1)
-    {
-        tmp->link=start;
-        start=tmp;
-        return start;
-    }
-    p=start;
-    for(i=1;i<pos-1 && p!=NULL;i++)
-    {
-        p=p->link;
-    }
-    if(p==NULL)
-    {
-        printf("There are less than %d elements\n",pos);
-    }
-    else
-    {
-        tmp->link=p->link;
-        p->link=tmp;
-    }
-    return start;
-}
-int main()
-{
-    struct Node *start=NULL;
-    int choice, data, item, pos;
+    int item,pos,choice;
     while(1)
     {
-        printf("1. Create List\n");
-        printf("2. Display\n");
-        printf("3. Insert at Beginning\n");
-        printf("4. Insert at end\n");
-        printf("5. Insert at Pos\n");
-        printf("6. Exit\n");
-        printf("Enter your choice: ");
+        printf("\n1. Insert at bginning");
+        printf("\n2. Insert at end");
+        printf("\n3. Insert at position");
+        printf("\n4. Delete at beginning");
+        printf("\n5. Delete at end");
+        printf("\n6. Delete at position");
+        printf("\n7. Display");
+        printf("\n8. Exit\n");
         scanf("%d",&choice);
         switch(choice)
         {
             case 1:
-                    start=create_node(start);
-                    break;
+            printf("\nEnter the element: ");
+            scanf("%d",&item);
+            ins_beg(item);
+            break;
             case 2:
-                    display(start);
-                    break;
+            printf("\nEnter the element: ");
+            scanf("%d",&item);
+            ins_end(item);
+            break;
             case 3:
-                    printf("Enter element to be inserted: ");
-                    scanf("%d",&data);
-                    start=insert_begin(start,data);
-                    break;
+            printf("\nEnter the element: ");
+            scanf("%d",&item);
+            printf("\nEnter the position: ");
+            scanf("%d",&pos);
+            ins_pos(item,pos);
+            break;
             case 4:
-                    printf("Enter element to be inserted: ");
-                    scanf("%d",&data);
-                    start=insert_end(start,data);
-                    break;
+            item=del_beg();
+            printf("\nDeleted Item: %d",item);
+            break;
             case 5:
-                    printf("Enter element to be inserted: ");
-                    scanf("%d",&data);
-                    start=insert_pos(start,data,pos);
-                    break;
+            item=del_end();
+            printf("\nDeleted Item: %d",item);
+            break;
             case 6:
-                    exit(1);
+            printf("\nEnter the position: ");
+            scanf("%d",&pos);
+            item=del_pos(pos);
+            printf("\nDeleted Item: %d",item);
+            break;
+            case 7:
+            display();
+            break;
+            case 8:
+            exit(0);
             default:
-                    printf("Wrong Choice\n");
+            printf("\nWrong Choice");
         }
     }
-    return 0;
+}
+struct Node *create_node()
+{
+    struct Node *temp=(struct Node *)malloc(sizeof(struct Node));
+    return temp;
+}
+void ins_beg(int item)
+{
+    struct Node *new=create_node();
+    new->data=item;
+    if(start==NULL)
+    {
+        start=new;
+        new->link=NULL;
+    }
+    else
+    {
+        new->link=start;
+        start=new;
+    }
+}
+void ins_end(int item)
+{
+    struct Node *new=create_node();
+    new->data=item;
+    new->link=NULL;
+    if(start==NULL)
+    {
+        start=new;
+    }
+    else
+    {
+        struct Node *ptr=start;
+        while(ptr->link!=NULL)
+        {
+            ptr=ptr->link;
+        }
+        ptr->link=new;
+    }
+}
+void ins_pos(int item, int pos)
+{
+    struct Node *new=create_node();
+    struct Node *ptr=start;
+    new->data=item;
+    if(pos==0)
+    {
+        new->link=start;
+        start=new;
+    }
+    else
+    {
+        for(int i=0;i<pos;i++)
+        {
+            ptr=ptr->link;
+            if(ptr==NULL)
+            {
+                printf("\nPosition not found");
+            }
+        }
+        new->link=ptr->link;
+        ptr->link=new;
+    }
+}
+int del_beg()
+{
+    int d;
+    struct Node *del;
+    if(start==NULL)
+    {
+        printf("\nUnderflow");
+        return 0;
+    }
+    else
+    {
+        del=start;
+        start=start->link;
+        d=del->data;
+        free(del);
+    }
+    return d;
+}
+int del_end()
+{
+    int d;
+    struct Node *ptr,*ptr1;
+    if(start==NULL)
+    {
+        printf("\nUnderflow");
+        return 0;
+    }
+    else
+    {
+        ptr=start;
+        while(ptr->link!=NULL)
+        {
+            ptr1=ptr;
+            ptr=ptr->link;
+        }
+        ptr1->link=NULL;
+        d=ptr->data;
+        free(ptr);
+        return d;
+    }
+}
+int del_pos(int pos)
+{
+    struct Node *temp,*ptr;
+    int i,d;
+    if(start==NULL)
+    {
+        printf("\nUnderflow");
+        return 0;
+    }
+    else
+    {
+        if(pos==0)
+        {
+            ptr=start;
+            start=start->link;
+            d=ptr->data;
+            free(ptr);
+            return d;
+        }
+        else
+        {
+            ptr=start;
+            for(i=0;i<pos;i++)
+            {
+                temp=ptr;
+                ptr=ptr->link;
+                if(ptr==NULL)
+                {
+                    printf("\nPosition not found");
+                    return 0;
+                }
+            }
+            temp->link=ptr->link;
+            d=ptr->data;
+            free(ptr);
+            return d;
+        }
+    }
+}
+void display()
+{
+    struct Node *ptr=start;
+    while(ptr!=NULL)
+    {
+        printf("%d ",ptr->data);
+        ptr=ptr->link;
+    }
 }
