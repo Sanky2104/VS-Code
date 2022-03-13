@@ -8,7 +8,7 @@ struct Node
 	int data;
 	struct Node *link;
 };
-struct Node *start=NULL;
+struct Node *start;
 void display();
 struct Node *create_node();
 void ins_beg(int item);
@@ -219,9 +219,10 @@ int del_pos(int pos)
 }
 void display()
 {
-    while(start!=NULL)
+    struct Node *ptr=start;
+    while(ptr!=NULL)
     {
-        printf("%d ",start->data);
-        start=start->link;
+        printf("%d ",ptr->data);
+        ptr=ptr->link;
     }
 }
