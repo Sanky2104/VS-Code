@@ -98,23 +98,124 @@ void insert_beg(int item)
 }
 void insert_pos(int item, int pos)
 {
-    
+    struct Node *new=create_node();
+    struct Node *ptr=start;
+    int p=1;
+    new->data=item;
+    if(start==NULL)
+    {
+        new->next=NULL;
+        new->prev=start;
+        start=new;
+    }
+    else
+    {
+        while(p<pos)
+        {
+            ptr=ptr->next;
+            p++;
+        }
+        new->next=ptr->next;
+        ptr->next->prev=new;
+        ptr->next=new;
+        ptr=new;
+    }
 }
 void insert_end(int item)
 {
-
+    struct Node *new=create_node();
+    struct Node *ptr=start;
+    new->data=item;
+    if(start==NULL)
+    {
+        new->prev=NULL;
+        new->next=NULL;
+        start=new;
+    }
+    else
+    {
+        while(ptr->next!=NULL)
+        {
+            ptr=ptr->next;
+        }
+        ptr->next=new;
+        new->prev=ptr;
+        new->next=NULL;
+    }
 }
 int delete_beg()
 {
-
+    int i;
+    if(start==NULL)
+    {
+        printf("\nEmpty List");
+        return -1;
+    }
+    else if(start->next==NULL)
+    {
+        i=start->data;
+        struct Node *temp=start;
+        start=NULL;
+        free(temp);
+    }
+    else
+    {
+        i=start->data;
+        start->next->prev=start;
+        start=start->next;
+    }
+    return i;
 }
 int delete_end()
 {
-
+    int i;
+    struct Node *ptr=start;
+    if(start==NULL)
+    {
+        printf("\nEmpty List");
+        return -1;
+    }
+    else if(start->next==NULL)
+    {
+        i=start->data;
+        struct Node *temp=start;
+        start=NULL;
+        free(temp);
+    }
+    else
+    {
+        while(ptr->next!=NULL)
+        {
+            ptr=ptr->next;
+        }
+        i=ptr->data;
+        ptr->prev->next=NULL;
+        free(ptr);
+    }
+    return i;
 }
 int delete_pos(int pos)
 {
-
+    struct Node *ptr=start;
+    int i,p=1;
+    if(start==NULL)
+    {
+        printf("\nList is Empty");
+    }
+    else
+    {
+        while(p<pos)
+        {
+            ptr=ptr->next;
+            p++;
+        }
+        i=ptr->data;
+        struct node *temp=ptr;
+        ptr->prev->next=ptr->next;
+        ptr->next->prev=ptr->prev;
+        free(temp);
+        return i;
+    }
 }
 void display()
 {

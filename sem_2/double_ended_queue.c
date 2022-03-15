@@ -54,7 +54,7 @@
                      default:
                      printf("\nWrong Choice");
                  }
-                 break;
+                 exit(0);
              }
              case 2:
              printf("\nOUTPUT RESTRICTED QUEUE\n");
@@ -90,7 +90,7 @@
                      printf("\nWrong Choice");
                  }
              }
-         break;
+         exit(0);
          default:
          printf("\nWrong Choice");
          }
@@ -102,9 +102,13 @@ void insert_front(int item)
     if(queue[0]=NULL)
     {
         queue[0]=item;
+        rear++;
     }
     else
     {
-        for(i=1;)
+        for(i=1;i<rear;i++)
+        {
+            
+        }
     }
 }

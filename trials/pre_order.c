@@ -30,7 +30,8 @@ int main()
     root->left->left=new_node(data);
     data='F';
     root->left->right=new_node(data);
-    pre_order();
+    //pre_order();
+    display(root);
     return 0;
 }
 void pre_order()
@@ -73,4 +74,14 @@ struct Node *new_node(char data)
     temp->right=NULL;
     temp->left=NULL;
     return temp;
+}
+void display(struct Node *root)
+{
+    if(root==NULL)
+    {
+        return;
+    }
+    printf("%c ",root->data);
+    display(root->left);
+    display(root->right);
 }
