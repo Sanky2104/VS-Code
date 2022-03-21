@@ -69,7 +69,7 @@ int main()
                 break;
             case 4:
                 value=length();
-                printf("\nLength of the list: %d",value);
+                printf("\nLength of the list: %d\n",value);
                 break;
             case 5:
                 printf("\nKey to find: ");
@@ -93,6 +93,7 @@ int main()
                 printf("\nWrong Choice");
         }
     }
+    return 0;
 }
 struct Node *create_node()
 {
@@ -116,7 +117,7 @@ void insert_update(int key, int value)
         {
             ptr=ptr->next;
         }
-        new->next=ptr;
+        new->next=ptr->next;
         ptr->next=new;
     }
 }
@@ -124,7 +125,7 @@ int search(int key)
 {
     int i=-1;
     struct Node *ptr=start;
-    while(ptr!=NULL)
+    while(ptr->next!=NULL)
     {
         if(ptr->data->key==key)
         {
@@ -135,7 +136,7 @@ int search(int key)
     }
     if(i==-1)
     {
-        return i;
+        return -1;
     }
     else
     {
@@ -144,14 +145,17 @@ int search(int key)
 }
 int delete(int key)
 {
-    struct Node *ptr=start;
+    struct Node *ptr=start,*temp;
     int i,flag=0;
-    while(ptr->data->key<key)
+    while(ptr->data->key<=key)
     {
         if(ptr->data->key==key)
         {
+            temp=ptr->next;
             i=ptr->data->value;
-            flag++;
+            ptr->next=ptr->next->next;
+            free(temp);
+            ++flag;
             break;
         }
         ptr=ptr->next;
@@ -168,8 +172,8 @@ int delete(int key)
 int length()
 {
     struct Node *ptr=start;
-    int count=0;
-    while(ptr!=NULL)
+    int count=1;
+    while(ptr->next!=NULL)
     {
         count++;
         ptr=ptr->next;
