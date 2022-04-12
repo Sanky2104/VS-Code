@@ -1,12 +1,12 @@
 //Author: Sanskriti Gupta
-//Date: 5 March 2022
-//Aim: To implement doubly linked list 
+//Date: 25 March 2022
+//Aim: To create a single linked list and implement all the insertion/deleteion operations
 #include<stdio.h>
 #include<stdlib.h>
 struct Node
 {
     int data;
-    struct Node *next,*prev;
+    struct Node *next;
 };
 struct Node *start=NULL;
 void insert_beg(int item);
@@ -16,20 +16,20 @@ int delete_beg();
 int delete_pos(int pos);
 int delete_end();
 void display();
-struct Node * create_node();
-int main()
+struct Node *create_node();
+void main()
 {
-    int item,choice,pos,del;
+    int choice, item, pos;
     while(1)
     {
-        printf("\n1. To Insert at beginning ");
-        printf("\n2. To Insert at position ");
-        printf("\n3. To Insert at end ");
-        printf("\n4. To Delete at beginning ");
-        printf("\n5. To Delete at position ");
-        printf("\n6. To Delete at end ");
-        printf("\n7. To Display ");
-        printf("\n8. To Exit \n");
+        printf("\n1. Insert at beginning");
+        printf("\n2. Insert at position");
+        printf("\n3. Insert at end");
+        printf("\n4. Delete at beginning");
+        printf("\n5. Delete at position");
+        printf("\n6. Delete at end");
+        printf("\n7. Display");
+        printf("\n8. Exit\n");
         scanf("%d",&choice);
         switch(choice)
         {
@@ -51,18 +51,18 @@ int main()
                 insert_end(item);
                 break;
             case 4:
-                del=delete_beg();
-                printf("\nDeleted Item: %d",del);
+                item=delete_beg();
+                printf("\nDeleted Item: %d",item);
                 break;
             case 5:
                 printf("\nEnter the position: ");
                 scanf("%d",&pos);
-                del=delete_pos(pos);
-                printf("\nDeleted item: %d",del);
+                item=delete_pos(pos);
+                printf("\nDeleted Item: %d",item);
                 break;
             case 6:
-                del=delete_end();
-                printf("\nDeleted Item: %d",del);
+                item=delete_end();
+                printf("\nDeleted Item: %d",item);
                 break;
             case 7:
                 display();
@@ -85,13 +85,11 @@ void insert_beg(int item)
     new->data=item;
     if(start==NULL)
     {
-        new->prev=start;
         start=new;
         new->next=NULL;
     }
     else
     {
-        new->prev=start;
         new->next=start;
         start=new;
     }
@@ -99,130 +97,113 @@ void insert_beg(int item)
 void insert_pos(int item, int pos)
 {
     struct Node *new=create_node();
-    struct Node *ptr=start;
-    int p=1;
     new->data=item;
     if(start==NULL)
     {
-        new->next=NULL;
-        new->prev=start;
         start=new;
+        new->next=NULL;
     }
     else
     {
-        while(p<pos)    
+        int p=1;
+        struct Node *ptr=start;
+        while(p<pos-1)
         {
             ptr=ptr->next;
             p++;
         }
         new->next=ptr->next;
-        ptr->next->prev=new;
         ptr->next=new;
-        ptr=new;
     }
 }
 void insert_end(int item)
 {
     struct Node *new=create_node();
-    struct Node *ptr=start;
     new->data=item;
+    new->next=NULL;
     if(start==NULL)
     {
-        new->prev=NULL;
-        new->next=NULL;
         start=new;
     }
     else
     {
+        struct Node *ptr=start;
         while(ptr->next!=NULL)
         {
             ptr=ptr->next;
         }
         ptr->next=new;
-        new->prev=ptr;
-        new->next=NULL;
     }
 }
 int delete_beg()
 {
-    int i;
     if(start==NULL)
     {
-        printf("\nEmpty List");
-        return -1;
-    }
-    else if(start->next==NULL)
-    {
-        i=start->data;
-        struct Node *temp=start;
-        start=NULL;
-        free(temp);
+        printf("\nUnderflow");
     }
     else
     {
-        i=start->data;
-        start->next->prev=start;
+        struct Node *ptr=start;
+        int i=start->data;
         start=start->next;
-    }
-    return i;
-}
-int delete_end()
-{
-    int i;
-    struct Node *ptr=start;
-    if(start==NULL)
-    {
-        printf("\nEmpty List");
-        return -1;
-    }
-    else if(start->next==NULL)
-    {
-        i=start->data;
-        struct Node *temp=start;
-        start=NULL;
-        free(temp);
-    }
-    else
-    {
-        while(ptr->next!=NULL)
-        {
-            ptr=ptr->next;
-        }
-        i=ptr->data;
-        ptr->prev->next=NULL;
         free(ptr);
+        return i;
     }
-    return i;
 }
 int delete_pos(int pos)
 {
-    struct Node *ptr=start;
-    int i,p=1;
     if(start==NULL)
     {
-        printf("\nList is Empty");
+        printf("\nUnderflow");
     }
     else
     {
-        while(p<pos)
+        struct Node *ptr=start,*ptr1;
+        int p=1,i;
+        while(p<=pos-1)
         {
+            ptr1=ptr;
             ptr=ptr->next;
             p++;
         }
         i=ptr->data;
-        struct node *temp=ptr;
-        ptr->prev->next=ptr->next;
-        ptr->next->prev=ptr->prev;
-        free(temp);
+        ptr1->next=ptr->next;
+        free(ptr);
+        return i;
+    }
+}
+int delete_end()
+{
+    int i=0;
+    if(start==NULL)
+    {
+        printf("\nUnderflow");
+    }
+    else
+    {
+        struct Node *ptr=start,*temp;
+        while(ptr->next->next!=NULL)
+        {
+            ptr=ptr->next;
+        }
+        i=ptr->next->data;
+        ptr->next=NULL;
         return i;
     }
 }
 void display()
 {
     struct Node *ptr=start;
-    while(ptr!=NULL)
+    if(start==NULL)
     {
-        printf("%d ",ptr->data);
-        ptr=ptr->next;
+        printf("\nThe List is Empty");
+    }
+    else
+    {
+        while(ptr!=NULL)
+        {
+            printf("%d->",ptr->data);
+            ptr=ptr->next;
+        }
     }
 }

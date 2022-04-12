@@ -110,12 +110,15 @@ void insert_update(int key, int value)
     {
         new->next=NULL;
         start=new;
+        printf("insert_beg");
     }
     else
     {
-        while(ptr->data->key<key)
+        printf("%d-->",start->data->key);
+        while((ptr->data->key<key) && (ptr->next !=NULL))
         {
             ptr=ptr->next;
+            printf("insert");
         }
         new->next=ptr->next;
         ptr->next=new;

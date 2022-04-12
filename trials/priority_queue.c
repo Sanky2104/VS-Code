@@ -77,6 +77,7 @@ int del()
     if(front==NULL)
     {
         printf("\nUnderflow");
+        return 0;
     }
     else
     {
@@ -84,6 +85,7 @@ int del()
         item=temp->info;
         front=front->link;
         free(temp);
+        return item;
     }
 }
 void display()

@@ -52,7 +52,7 @@ struct Node *create_node()
 }
 void enqueue(int data)
 {
-    struct Node *ptr=start;1
+    struct Node *ptr=start;
     struct Node *new=create_node();
     new->data=data;
     if(start==NULL)

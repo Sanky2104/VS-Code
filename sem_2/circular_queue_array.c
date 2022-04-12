@@ -30,11 +30,12 @@ void main()
                 //count++;
                 break;
             case 2:
-                printf("%d ",dequeue());
+                printf("Deleted Item: %d",dequeue());
                 //count--;
                 break;
             case 3:
                 display();
+                break;
             case 4:
                 exit(0);
             default:

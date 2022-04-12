@@ -19,7 +19,7 @@ void main()
     char str[CAPACITY];
     char *ptr;
     ptr=str;
-    printf("Enter the string: ");
+    printf("\nEnter the string: ");
     gets(ptr);
     for(i=0;i<strlen(str);i++)
     {
@@ -39,11 +39,11 @@ void main()
     }
     if(flag==0)
     {
-        printf("%s is a palindrome",str);
+        printf("\n%s is a palindrome",str);
     }
     else
     {
-        printf("%s is NOT a palinddome",str);
+        printf("\n%s is NOT a palinddome",str);
     }
 }
 void enqueue(char data)
