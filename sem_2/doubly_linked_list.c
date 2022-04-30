@@ -15,6 +15,7 @@ void insert_end(int item);
 int delete_beg();
 int delete_pos(int pos);
 int delete_end();
+int linear_search(int item);
 void display();
 struct Node * create_node();
 int main()
@@ -29,7 +30,8 @@ int main()
         printf("\n5. To Delete at position ");
         printf("\n6. To Delete at end ");
         printf("\n7. To Display ");
-        printf("\n8. To Exit \n");
+        printf("\n8. Linear Search");
+        printf("\n9. To Exit \n");
         scanf("%d",&choice);
         switch(choice)
         {
@@ -68,6 +70,19 @@ int main()
                 display();
                 break;
             case 8:
+                printf("\nEnter element to be searched: ");
+                scanf("%d",&item);
+                int i=linear_search(item);
+                if(i)
+                {
+                    printf("\n%d Found",item);
+                }
+                else
+                {
+                    printf("%d NOT found",item);
+                }
+                break;
+            case 9:
                 exit(0);
             default:
                 printf("\nWrong Choice");
@@ -110,7 +125,7 @@ void insert_pos(int item, int pos)
     }
     else
     {
-        while(p<pos)    
+        while(p<pos-1)    
         {
             ptr=ptr->next;
             p++;
@@ -216,6 +231,28 @@ int delete_pos(int pos)
         free(temp);
         return i;
     }
+}
+int linear_search(int item)
+{
+    int flag=0;
+    if(start->data==item)
+    {
+        flag++;
+    }
+    else
+    {
+        struct Node *ptr=start;
+        while(ptr->next!=NULL)
+        {
+            ptr=ptr->next;
+            if(ptr->data==item)
+            {
+                flag++;
+                break;
+            }
+        }
+    }
+    return flag;
 }
 void display()
 {

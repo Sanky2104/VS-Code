@@ -1,6 +1,6 @@
 //Author: Sanskriti Gupta
 //Date: 12 April 2022
-//Aim: Implementing bubble sort
+//Aim: Implementing insertion sort
 #include<stdio.h>
 int arr[50];
 void ins_element(int n)

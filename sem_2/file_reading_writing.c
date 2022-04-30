@@ -21,7 +21,7 @@ void print()
 }
 void _write()
 {
-    FILE *ptr1=fopen("text1.txt","a");
+    FILE *ptr1=fopen("text.txt","a");
     for(int j=0;j<i-1;j++)
     {
         fprintf(ptr1,"%d ",array[j]);

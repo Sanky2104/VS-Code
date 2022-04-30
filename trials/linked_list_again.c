@@ -1,6 +1,9 @@
 //Author: Sanskriti Gupta
 //Date: 25 March 2022
 //Aim: To create a single linked list and implement all the insertion/deleteion operations
+
+//YE WALA CORRECT HAI
+
 #include<stdio.h>
 #include<stdlib.h>
 struct Node
