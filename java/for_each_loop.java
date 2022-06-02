@@ -18,5 +18,6 @@ public class for_each_loop
         {
             System.out.print(t+" ");
         };
+        var.close();
     }
 }
