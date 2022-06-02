@@ -1,6 +1,9 @@
 //Author: Sanskriti Gupta
 //Date: 27 April 2022
 //Aim: To add 2 polynomials using linked list
+
+//YE WALA GALAT HAI 
+
 #include<stdio.h>
 #include<stdlib.h>
 struct Node

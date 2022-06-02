@@ -76,6 +76,7 @@ void ins_pos(int item, int pos)
         while(p<pos-1)
         {
             ptr=ptr->link;
+            p++;
         }
         new->link=ptr->link;
         ptr->link=new;
@@ -127,6 +128,7 @@ int del_pos(int pos)
         while(p<pos-1)
         {
             ptr=ptr->link;
+            p++;
         }
         int i=ptr->link->data;
         struct Node *temp=ptr->link;

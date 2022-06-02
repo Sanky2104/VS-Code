@@ -1,9 +1,3 @@
-//Author: Sanskriti Gupta
-//Date: 30 April 2022
-//Aim: To implement doubly linked list
-
-//YE WALA SAHI HAI
-
 #include<stdio.h>
 #include<stdlib.h>
 struct Node
@@ -30,14 +24,13 @@ void ins_beg(int item)
     else
     {
         new->next=start;
-        start=new;
         new->prev=NULL;
+        start=new;
     }
 }
 void ins_end(int item)
 {
     struct Node *new=create_node();
-    new->data=item;
     if(start==NULL)
     {
         start=new;
@@ -51,114 +44,65 @@ void ins_end(int item)
         {
             ptr=ptr->next;
         }
-        new->prev=ptr;
         ptr->next=new;
+        new->prev=ptr;
         new->next=NULL;
     }
 }
-void ins_pos(int item, int pos)
-{
-    struct Node *new=create_node();
-    new->data=item;
-    if(start==NULL)
-    {
-        start=new;
-        new->next=NULL;
-        new->prev=NULL;
-    }
-    else
-    {
-        int p=1;
-        struct Node *ptr=start;
-        while(p<pos-1)
-        {
-            ptr=ptr->next;
-        }
-        new->prev=ptr;
-        new->next=ptr->next;
-        ptr->next=new;
-    }
-}
-int del_beg()
-{
-    if(start==NULL)
-    {
-        printf("\nList is Empty");
-    }
-    else
-    {
-        int i=start->data;
-        start->next->prev=NULL;
-        struct Node *temp=start;
-        start=start->next;
-        free(temp);
-        return i;
-    }
-}
-int del_end()
-{
-    if(start==NULL)
-    {
-        printf("\nList is Empty");
-    }
-    else
-    {
-        struct Node *ptr=start;
-        while(ptr->next->next!=NULL)
-        {
-            ptr=ptr->next;
-        }
-        int i=ptr->next->data;
-        struct Node *temp=ptr->next;
-        ptr->next=NULL;
-        free(temp);
-        return i;
-    }
-}
-int del_pos(int pos)
-{
-    if(start==NULL)
-    {
-        printf("\nList is Empty");
-    }
-    else
-    {
-        int p=1;
-        struct Node *ptr=start;
-        while(p<pos-1)
-        {
-            ptr=ptr->next;
-        }
-        int i=ptr->next->data;
-        struct Node *temp=ptr->next;
-        ptr->next->next->prev=ptr;
-        ptr->next=ptr->next->next;
-        free(temp);
-        return i;
-    }
-}
+void ins_pos(int item, int pos);
+int del_beg();
+int del_end();
+int del_pos(int pos);
 void display()
 {
-    struct Node *ptr=start;
-    while(ptr!=NULL)
+    if(start==NULL)
     {
-        printf("%d ",ptr->data);
-        ptr=ptr->next;
+        printf("\nNothing to Print, Empty List");
+    }
+    else
+    {
+        struct Node *ptr=start;
+        while(ptr!=NULL)
+        {
+            printf("%d ",ptr->data);
+            ptr=ptr->next;
+        }
+    }
+}
+void display_reverse()
+{
+    if(start==NULL)
+    {
+        printf("\nEmpty list");
+    }
+    else
+    {
+        struct Node *ptr=start;
+        while(ptr!=NULL)
+        {
+            ptr=ptr->next;
+        }
+        while(ptr!=NULL)
+        {
+            printf("%d ",ptr->data);
+            ptr=ptr->prev;
+        }
     }
 }
 void main()
 {
-    int item,pos,choice;
+    int choice,item,pos;
     while(1)
     {
         printf("\n1. Insert at beginning");
         printf("\n2. Insert at end");
         printf("\n3. Insert at position");
-        printf("\n4. Deletion at beginning");
+        printf("\n4. Delete at beginning");
         printf("\n5. Delete at end");
         printf("\n6. Delete at position");
         printf("\n7. Display");
-        printf("\n8. Exit\n");
+        printf("\n8. Display in reverse");
+        printf("\n9. Exit\n");
         scanf("%d",&choice);
         switch(choice)
         {
@@ -176,7 +120,7 @@ void main()
                 printf("\nEnter the element: ");
                 scanf("%d",&item);
                 printf("\nEnter the position: ");
-                scanf("%d",&pos);
+                sacnf("%d",&pos);
                 ins_pos(item,pos);
                 break;
             case 4:
@@ -197,9 +141,12 @@ void main()
                 display();
                 break;
             case 8:
+                display_reverse();
+                break;
+            case 9:
                 exit(0);
             default:
-                printf("\nWrong choice");
+                printf("\nWrong Choice");
         }
     }
 }

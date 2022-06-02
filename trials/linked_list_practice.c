@@ -1,6 +1,6 @@
 //Author: Sanskriti Gupta
-//Date: 30 April 2022
-//Aim: To implement doubly linked list
+//Date: 1 May 2022
+//Aim: To implement singly linked list
 
 //YE WALA SAHI HAI
 
@@ -9,7 +9,7 @@
 struct Node
 {
     int data;
-    struct Node *next,*prev;
+    struct Node *next;
 };
 struct Node *start=NULL;
 struct Node *create_node()
@@ -25,24 +25,21 @@ void ins_beg(int item)
     {
         start=new;
         new->next=NULL;
-        new->prev=NULL;
     }
     else
     {
         new->next=start;
         start=new;
-        new->prev=NULL;
     }
 }
 void ins_end(int item)
 {
     struct Node *new=create_node();
     new->data=item;
+    new->next=NULL;
     if(start==NULL)
     {
         start=new;
-        new->next=NULL;
-        new->prev=NULL;
     }
     else
     {
@@ -51,9 +48,7 @@ void ins_end(int item)
         {
             ptr=ptr->next;
         }
-        new->prev=ptr;
         ptr->next=new;
-        new->next=NULL;
     }
 }
 void ins_pos(int item, int pos)
@@ -64,7 +59,6 @@ void ins_pos(int item, int pos)
     {
         start=new;
         new->next=NULL;
-        new->prev=NULL;
     }
     else
     {
@@ -73,8 +67,8 @@ void ins_pos(int item, int pos)
         while(p<pos-1)
         {
             ptr=ptr->next;
+            p++;
         }
-        new->prev=ptr;
         new->next=ptr->next;
         ptr->next=new;
     }
@@ -83,15 +77,14 @@ int del_beg()
 {
     if(start==NULL)
     {
-        printf("\nList is Empty");
+        printf("\nUNDERFLOW");
     }
     else
     {
         int i=start->data;
-        start->next->prev=NULL;
         struct Node *temp=start;
         start=start->next;
-        free(temp);
+        free(temp);;
         return i;
     }
 }
@@ -99,7 +92,7 @@ int del_end()
 {
     if(start==NULL)
     {
-        printf("\nList is Empty");
+        printf("\nUNDERFLOW");
     }
     else
     {
@@ -108,8 +101,8 @@ int del_end()
         {
             ptr=ptr->next;
         }
-        int i=ptr->next->data;
         struct Node *temp=ptr->next;
+        int i=ptr->next->data;
         ptr->next=NULL;
         free(temp);
         return i;
@@ -119,7 +112,7 @@ int del_pos(int pos)
 {
     if(start==NULL)
     {
-        printf("\nList is Empty");
+        printf("\nUNDERFLOW");
     }
     else
     {
@@ -128,10 +121,10 @@ int del_pos(int pos)
         while(p<pos-1)
         {
             ptr=ptr->next;
+            p++;
         }
         int i=ptr->next->data;
         struct Node *temp=ptr->next;
-        ptr->next->next->prev=ptr;
         ptr->next=ptr->next->next;
         free(temp);
         return i;
@@ -139,22 +132,29 @@ int del_pos(int pos)
 }
 void display()
 {
-    struct Node *ptr=start;
-    while(ptr!=NULL)
+    if(start==NULL)
     {
-        printf("%d ",ptr->data);
-        ptr=ptr->next;
+        printf("\nEmpty List, Nothing to print !!!");
+    }
+    else
+    {
+        struct Node *ptr=start;
+        while(ptr!=NULL)
+        {
+            printf("%d ",ptr->data);
+            ptr=ptr->next;
+        }
     }
 }
 void main()
 {
-    int item,pos,choice;
+    int choice,item,pos;
     while(1)
     {
         printf("\n1. Insert at beginning");
         printf("\n2. Insert at end");
         printf("\n3. Insert at position");
-        printf("\n4. Deletion at beginning");
+        printf("\n4. Delete at beginning");
         printf("\n5. Delete at end");
         printf("\n6. Delete at position");
         printf("\n7. Display");
@@ -199,7 +199,7 @@ void main()
             case 8:
                 exit(0);
             default:
-                printf("\nWrong choice");
+                printf("\nWrong Choice");
         }
     }
 }

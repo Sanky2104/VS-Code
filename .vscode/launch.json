@@ -5,6 +5,13 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "type": "java",
+            "name": "Launch first_program",
+            "request": "launch",
+            "mainClass": "first_program",
+            "projectName": "VS Code_19391ff1"
+        },
+        {
             "name": "(gdb) Launch",
             "type": "cppdbg",
             "request": "launch",
