@@ -3,7 +3,7 @@ public class for_each_loop
 {
     public static void main(String[] args) 
     {
-        Scanner var=new Scanner(System.in);
+        Scanner var = new Scanner(System.in);
         System.out.print("Enter the number of elements in the array: ");
         int n=var.nextInt();
         int[] arr=new int[n];
