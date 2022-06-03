@@ -13,5 +13,6 @@ public class switch_case
             default->"Invalid Day";
         };
         System.out.println(day);
+        var.close();
     }
 }
