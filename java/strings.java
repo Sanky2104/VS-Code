@@ -11,5 +11,6 @@ public class strings
         {
             System.out.print(str.charAt(i)+" ");
         };
+        var.close();
     }
 }
