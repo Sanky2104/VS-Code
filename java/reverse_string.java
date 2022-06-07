@@ -22,4 +22,4 @@ public class reverse_string
         String rev = new String(new_arr);
         return rev;
     }
-}
+}   

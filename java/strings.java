@@ -3,7 +3,7 @@ public class strings
 {
     public static void main(String[] args)
     {
-        Scanner var= new Scanner(System.in);
+        Scanner var = new Scanner(System.in);
         System.out.println("Enter any string: ");
         String str= var.nextLine();
         int i=0;

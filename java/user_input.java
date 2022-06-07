@@ -17,5 +17,6 @@ public class user_input
         {
             System.out.println(name+" is NOT allowed to vote");
         }
+        var.close();
     }
 }
