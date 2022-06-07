@@ -1,6 +1,4 @@
 import java.util.Scanner;
-
-import javax.lang.model.util.ElementScanner14;
 public class prime_number
 {
     public static void main(String[] args) 
