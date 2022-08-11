@@ -23,7 +23,7 @@ void insertion_sort(int n)
         {
             arr[k+1]=arr[k];
             k--;
-            arr[k]=key;
+            arr[k+1]=key;
         }
     }
 }
