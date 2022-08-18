@@ -1,5 +1,5 @@
 import java.util.Scanner;
-import java.lang.*;
+import java.lang.Character;
 public class number_of_words
 {
     public static void main(String[] args)
