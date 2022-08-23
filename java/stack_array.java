@@ -29,18 +29,24 @@ public class stack_array
                 switch(choice)
                 {
                     case 1:
+                    {
                         System.out.print("\nEnter the element: ");
                         int item = var.nextInt(); 
                         push(arr,item);
                         break;
+                    }
                     case 2:
-                        int i = pop(arr);
-                        System.out.println("\nDeleted Item: " + i);
+                    {
+                        int item = pop(arr);
+                        System.out.println("\nDeleted Item: " + item);
                         break;
+                    }
                     case 3:
-                        int a = peek(arr);
-                        System.out.println("\nTopmost Item: " + a);
+                    {
+                        int item = peek(arr);
+                        System.out.println("\nTopmost Item: " + item);
                         break;
+                    }
                     case 4:
                         display(arr);
                         break;
