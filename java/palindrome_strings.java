@@ -1,41 +1,47 @@
-//YE WALA GALAT HAI 
 import java.util.Scanner;
 public class palindrome_strings
 {
     public static void main(String[] args)
     {
         Scanner var = new Scanner(System.in);
-        System.out.print("\nEnter a string: ");
-        String str = var.nextLine();
-        int n = str.length();
-        int result = check_palindrome(str, n);
-        if(result == 1)
+        try
         {
-            System.out.print("\n" + str +" is a palindrome");
+            String str;
+            System.out.print("\nEnter a string: ");
+            str = var.nextLine();
+            int i = string_palindrome(str);
+            if(i==1)
+            {
+                System.out.print("\n" + str + " is a Palindrome");
+            }
+            else
+            {
+                System.out.print("\n" + str + " is NOT a palindrome");
+            }
         }
-        else
+        finally
         {
-            System.out.print("\n" + str + " is NOT a palindrome");
+            var.close();
         }
-        var.close();
     }
-    public static int check_palindrome(String str, int n)
+    public static int string_palindrome(String str)
     {
-        char[] ch = new char[n];
-        char[] arr = new char[n];
-        int i,top=0;
-        for(i=0;i<n;i++)
+        char[] reverse = new char[str.length()];
+        int i,count=0;
+        for(i=0;i<str.length();i++)
         {
-            ch[i] = str.charAt(i);
+            reverse[i] = str.charAt(str.length()-i-1);
         }
-        for(i=n-1;i>=0;i--)
+        String rev = new String(reverse);
+        System.out.print("\nReverse String: " + rev);
+        for(i=0;i<str.length();i++)
         {
-            arr[top] = ch[i];
-            top++;
+            if(reverse[i] == str.charAt(i))
+            {
+                count++;
+            }
         }
-        String original = String.copyValueOf(ch);
-        String reversed = String.copyValueOf(arr);
-        if(original == reversed)
+        if(count == str.length())
         {
             return 1;
         }
