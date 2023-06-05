@@ -204,6 +204,7 @@ public class linkedlist
                 }
                 case 8:
                 {
+                    sc.close();
                     System.exit(0);
                 }
             }
