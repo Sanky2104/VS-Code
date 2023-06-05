@@ -18,7 +18,7 @@ public class array_insertion_deletion
         }
         public void ins_pos_arr(int data, int pos)
         {
-            for(i=n-1;i>pos-1;i--)
+            for(i=n-1;i>pos+1;i--)
             {
                 arr[i] = arr[i+1];
             }
