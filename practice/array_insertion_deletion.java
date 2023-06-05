@@ -96,6 +96,7 @@ public class array_insertion_deletion
                 }
                 case 5:
                 {
+                    sc.close();
                     System.exit(0);
                 }
             }
