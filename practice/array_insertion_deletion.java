@@ -18,15 +18,29 @@ public class array_insertion_deletion
         }
         public void ins_pos_arr(int data, int pos)
         {
-            for(i=n-1;i>pos+1;i--)
+            this.n = this.n +1;
+            for(i=n-1;i>=pos-1;i--)
             {
-                arr[i] = arr[i+1];
+                arr[i+1] = arr[i];
             }
             arr[pos-1] = data;
         }
         public int del_pos_arr(int pos)
         {
-            return 0;
+            if(n==0)
+            {
+                return 0;
+            }
+            else
+            {
+                int data = arr[pos-1];
+                for(i=pos-1;i<n;i++)
+                {
+                    arr[i] = arr[i+1];
+                }
+                this.n = n-1;
+                return data;
+            }
         }
         public void display()
         {
