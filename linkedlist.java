@@ -1,4 +1,3 @@
-//package practice;
 import java.util.Scanner;
 import java.lang.System;
 public class linkedlist
