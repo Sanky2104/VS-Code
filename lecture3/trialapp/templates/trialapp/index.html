@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang ="en">
+    <head>
+        <title>Trial App !!!</title>
+        <link href = "{% static 'trialapp/styles.css' %}" rel = "stylesheet">
+    </head>
+    <body>
+        <div class ='divclass roundCorners'>
+            <h1>Hey, Folks !!!</h1>
+        </div>
+        <p id = 'welcome'><u>Welcome to this Trial Application</u></p>
+        <div id = "catdiv">
+            <p class = 'cat'><u>Cat</u></p>
+            <p class  ='cattext'>Here, we are going to list some categories of cats: </p>
+            <ul class="cattext">
+                <li>Persian cat</li>
+                <li>British Shorthair</li>
+                <li>American Bobtail</li>
+            </ul>
+        </div>
+        <div id = 'me'>
+            <p class="cat"><u>About me</u></p>
+            <p id = 'metext'>My name is Sanskriti, this is my trial to make an application on my own (with some help of the internet obviously :-P)</p>
+        </div>
+        <br>
+        <div id = "form">
+            <h1>Form</h1>
+            <form action = "{% url 'trialapp:index' %}" method="post">
+                {% csrf_token %}
+                <p><b>Your Name: </b></p>
+                <input type="text" name="name" placeholder="Your Name">
+                <input type = "submit">
+            </form>
+        </div>
+    </body>
+</html>
