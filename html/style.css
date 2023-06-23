@@ -1,0 +1,45 @@
+.rounded_corners {
+    border-radius: 20px;
+}
+
+#search {
+    height: 20px;
+    width: 100px;
+    align-items: center;
+    text-align: center;
+}
+
+form {
+    align-items: center;
+    text-align: center;
+}
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+  }
+
+#textbox {
+    height: 30px;
+    width: 500px;
+    font-size: 25px;
+}
+
+#search {
+    height: 38px;
+    width: 150px;
+    font-size: 25px;
+}
+
+a {
+    margin: 20px;
+    text-align: center;
+    font-size: 25px;
+}
+
+.upper_right {
+    margin-bottom: auto;
+    float: right;
+}
