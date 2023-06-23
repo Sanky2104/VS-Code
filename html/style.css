@@ -18,7 +18,12 @@ p {
     margin-left: auto;
     margin-right: auto;
     width: 50%;
-  }
+}
+
+img {
+    display: block;
+    margin: 0 auto;
+}
 
 #textbox {
     height: 30px;
@@ -46,4 +51,9 @@ a {
 div {
     padding: 50px;
     font-size: 30px;;
+}
+
+button {
+    height: 20px;
+    width: 120px;
 }
