@@ -9,9 +9,8 @@
     text-align: center;
 }
 
-form {
-    align-items: center;
-    text-align: center;
+p {
+    align-items: left;
 }
 
 .center {
@@ -42,4 +41,9 @@ a {
 .upper_right {
     margin-bottom: auto;
     float: right;
+}
+
+div {
+    padding: 50px;
+    font-size: 30px;;
 }

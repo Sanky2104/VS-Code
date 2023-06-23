@@ -5,9 +5,12 @@
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
+        <a href = "googlesearch.html" class="upper_right">Google Search</a>
+        <a href = "google_advanced_search.html" class = "upper_right">Advanced Google Search</a>
         <img src = "google_images.png" class = "center">
-        <form action = "https://www.google.com/imghp/search" class = "center">
-            <input id = "textbox" type = "text" name = "q">
+        <form action = "https://www.google.com/search" class = "center" method ="get">
+            <input type = "hidden" name ="tbm" value="isch">
+            <input id = "textbox" class="rounded_corners" type = "text" name = "q">
             <input id = "search" class="rounded_corners" type = "submit">
         </form>
         <a href = "googlesearch.html" class="center">Google Search</a>
