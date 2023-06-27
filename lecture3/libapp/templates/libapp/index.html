@@ -11,7 +11,7 @@
     </div>
     <div id="buttondiv" class="centerdiv">
         <button data-page="addbooks">Add Books</button>
-        <button data-page="booklist">Your BookList</button>
+        <button data-page="booklist" onclick = "showBooks()">Your BookList</button>
         <button data-page="viewbooks">View Books</button>
         <button data-page="search">Search Book</button>
     </div>
@@ -26,12 +26,12 @@
         </ol>
     </div>
     <div class="content centerdiv" id="booklist" style = "display: none;">
-        <h2>You currently have no books in your bookshelf !!!</h2>
+
     </div>
     <div class="content centerdiv" id="addbooks" style = "display: none;">
         <br><br>
-        <form>
-            <input type = "text" name = "title" placeholder="Title">
+        <form id = "formforadd">
+            <input type = "text" name = "title" placeholder="Title" id = "AddBook">
             <input type = "submit">
         </form>
     </div>
@@ -106,6 +106,37 @@
             const bookInput = document.getElementById("bookInput").value;
             fetchBookInfo(bookInput);
         });
+
+        //Accepting user input and displaying it
+
+        var books = [];
+        var newBook = document.getElementById('formforadd');
+        newBook.onsubmit = function() {
+            event.preventDefault();
+            var userBook = document.getElementById('AddBook').value;
+            books.push(userBook);
+            showBooks();
+            newBook.reset();
+        }
+        var content = document.getElementById('booklist');
+        //function showBooks() {
+            //content.innerHTML = books.join(', ');
+            /*books.forEach(function(item) {
+                var element = document.createElement('p');
+                element.textContent = item;
+                booklist.appendChild(element);
+            })*/ 
+            function showBooks() {
+                content.innerHTML = "";
+                books.forEach(function(item) {
+                    var listItem = document.createElement('li'); // Create <li> element
+                    listItem.textContent = item;
+                    listItem.style.fontSize = '20px'; // Set font size
+                    listItem.style.fontWeight = 'bold'; // Set font weight
+                    content.appendChild(listItem);
+                });
+            }
+
     </script>
 </body>
 </html>
