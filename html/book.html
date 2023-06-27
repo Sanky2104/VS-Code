@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Library</title>
+    <link href="C:/Users/gupta/OneDrive/Desktop/VS Code/lecture3/libapp/static/libapp/style.css" rel="stylesheet">
+</head>
+<body>
+    <div id="welcome" class="centerdiv">
+        WELCOME TO THE ONLINE LIBRARY
+    </div>
+    <div id="buttondiv" class="centerdiv">
+        <button data-page="addbooks">Add Books</button>
+        <button data-page="booklist">Your BookList</button>
+        <button data-page="viewbooks">View Books</button>
+        <button data-page="search">Search Book</button>
+    </div>
+    <div class="content centerdiv" id="viewbooks">
+        <br><br>
+        <ol>
+            <li>Five Point Someone</li>
+            <li>One Indian Girl</li>
+            <li>The Girl in Room 105</li>
+            <li>Harry Potter and the Philosopher's Stone</li>
+            <li>Harry Potter and the Chamber of Secrets</li>
+        </ol>
+    </div>
+    <div class="content centerdiv" id="booklist">
+        You currently have no books in your bookshelf !!!
+    </div>
+    <div class="content centerdiv" id="addbooks">
+
+    </div>
+    <div class="content centerdiv" id="search">
+        <form id="bookForm">
+            <input type="text" name="name" placeholder="Search Here..." id="bookInput">
+            <input type="submit" name="Search" value="Search">
+        </form>
+        <div id="bookInfo"></div>
+    </div>
+
+    <script>
+        //Shows one page and hides the others
+        function showPage(page) {
+            //Hide all the divs
+            document.querySelectorAll('.content').forEach(div => {
+                div.style.display = 'none';
+            })
+            //Shows the div provided in the argument
+            document.querySelector(`#${page}`).style.display = 'block';
+        }
+
+        //Wait for page to load
+        document.addEventListener('DOMContentLoaded', function() {
+            //Select all buttons
+            document.querySelectorAll('button').forEach(button => {
+                //When a button is clicked, switch to that page
+                button.onclick = function() {
+                    showPage(this.dataset.page);
+                }
+            })
+        });
+
+        // Function to fetch book information
+        function fetchBookInfo(bookTitle) {
+            const url = `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(bookTitle)}`;
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    // Check if any books were found
+                    if (data.totalItems === 0) {
+                        throw new Error("No books found!");
+                    }
+
+                    // Extract book details from the first result
+                    const book = data.items[0].volumeInfo;
+                    const title = book.title;
+                    const author = book.authors ? book.authors.join(", ") : "Unknown Author";
+                    const imageUrl = book.imageLinks?.thumbnail;
+                    const publicationYear = book.publishedDate?.substring(0, 4);
+
+                    // Display book information
+                    const bookInfo = document.getElementById("bookInfo");
+                    bookInfo.innerHTML = `
+                        <h2>${title}</h2>
+                        <p>Author: ${author}</p>
+                        <p>Publication Year: ${publicationYear}</p>
+                        <img src="${imageUrl}" alt="${title} cover" />
+                    `;
+                })
+                .catch(error => {
+                    console.error("Error retrieving book information:", error);
+                    const bookInfo = document.getElementById("bookInfo");
+                    bookInfo.innerHTML = "<p>Error retrieving book information. Please try again.</p>";
+                });
+        }
+
+        // Form submission event handler
+        document.getElementById("bookForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            const bookInput = document.getElementById("bookInput").value;
+            fetchBookInfo(bookInput);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+div {
+    text-align: center;
+    justify-content: center;
+}
+
+#welcome {
+    display: flex;
+    align-items: center; /* Vertically center the content */
+    justify-content: center; /* Horizontally center the content */
+    width: 1200px;
+    height: 200px;
+    color: blanchedalmond;
+    font-size: 32px;
+    font-family: Comic Sans MS, cursive;
+    background-image: url("book.png");
+    font-weight: bolder;
+    text-decoration: underline;
+}
+
+.centerdiv {
+    margin: auto;
+}  
+
+body {
+    background-color:aqua;
+}
+
+#buttondiv {
+    background-color: orange;
+    margin-top: 20px;
+    width: 1200px;
+    height: 50px;
+}
+
+div > button {
+    float: right;
+    margin: 10px;
+    font-family: 'Trebuchet MS';
+    font-size: 20px;
+}
+
+div > ol {
+    font-size: 20px;
+    font-family: 'Times New Roman';
+}
+
+#viewbooks {
+    background-image: url(bookshelf.png);
+    padding: 20px;
+    margin: 20px;
+    width: 1200px;
+    text-align: center;
+}
+
+#search {
+    text-align: center;
+    padding: 20px;
+}
+
+input {
+    font-size: 32px;
+}
