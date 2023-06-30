@@ -23,5 +23,6 @@ urlpatterns = [
     path('newyear/',include("newyear.urls")),
     path('tasks/',include("tasks.urls")),
     path('trialapp/',include("trialapp.urls")),
-    path('libapp/',include("libapp.urls"))
+    path('libapp/',include("libapp.urls")),
+    path('singlepage/',include("singlepage.urls"))
 ]
